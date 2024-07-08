@@ -1,11 +1,19 @@
+import { Header } from './components/Header';
 import { InputText } from './components/InputText';
-
 
 export function App(){
   return (
-    <div>
-      <h1 className="font-inter font-normal text-3xl">Hellow World</h1>
-      <InputText />
-    </div>
+    <main>
+    <Header/>
+      <div className='bg-gray-600 h-screen'>
+        <div className='max-w-[46rem] mx-auto'>
+          <form action="">
+            <header className=''>
+              <InputText/>
+            </header>
+          </form>
+        </div>
+      </div>
+    </main>
   )
 }
