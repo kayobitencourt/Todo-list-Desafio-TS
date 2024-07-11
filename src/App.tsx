@@ -2,7 +2,7 @@ import { PlusCircle,} from 'lucide-react';
 import { TaskItem } from './components/taskItem';
 import { Empty } from './components/empty';
 import { HeaderTask } from './components/headerTask';
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, ChangeEvent, InvalidEvent } from 'react';
 
 export interface ITask {
   id: number
@@ -38,6 +38,15 @@ export function App(){
     setInputValue('')
   }
 
+  function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>){
+    setInputValue(event.target.value)
+    event.target.setCustomValidity('')
+  }
+
+  function handleNewTaskInvalid(event: InvalidEvent<HTMLInputElement>){
+    event.target.setCustomValidity('Este campo é obrigatório')
+  }
+
   function handleRemoveTask(id: number) {
     const filteredTasks = tasks.filter((task) => task.id !== id)
 
@@ -69,16 +78,21 @@ export function App(){
       <div className='max-w-3xl w-full px-3 mx-auto mt-[-29px]'>
         <div className='space-y-16'>
           <div>
-            <form className='flex gap-2'>
+            <form className='flex gap-2' onSubmit={handleAddTask}>
               <input 
                 type="text"
-                onChange={(e) => setInputValue(e.target.value)} 
+                value={inputValue}
+                onChange={handleNewTaskChange}
+                onInvalid={handleNewTaskInvalid} 
                 className="p-4 text-gray-100 border border-gray-700 bg-gray-500 flex-1 placeholder:text-gray-300 rounded-lg outline-none focus:border-purple-dark" 
-                placeholder="Adicione uma nova tarefa" 
+                placeholder="Adicione uma nova tarefa"
+                required 
               />
-              <button onClick={handleAddTask} className='flex items-center gap-2 p-4 justify-center rounded-lg bg-blue-dark font-bold text-sm text-gray-100 hover:bg-blue transition' type="submit">
-                Criar
-                <PlusCircle className='size-4' />
+              <button
+                className='flex items-center gap-2 p-4 justify-center rounded-lg bg-blue-dark font-bold text-sm text-gray-100 hover:bg-blue transition' 
+                type="submit">
+                  Criar
+                  <PlusCircle className='size-4' />
               </button>
             </form>
           </div>
