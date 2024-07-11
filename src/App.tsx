@@ -49,11 +49,6 @@ export function App(){
 
   function handleRemoveTask(id: number) {
     const filteredTasks = tasks.filter((task) => task.id !== id)
-
-    if (!confirm('Deseja mesmo apagar essa tarefa?')) {
-      return
-    }
-
     setTasks(filteredTasks)
   }
 
