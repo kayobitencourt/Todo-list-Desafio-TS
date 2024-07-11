@@ -17,7 +17,7 @@ export function Task() {
     <div className="flex gap-3 py-4 px-5 bg-gray-500 rounded-lg border border-gray-400 items-start text-sm">
       <input 
         type="checkbox" 
-        className="w-5 mt-1" 
+        className="w-5 mt-1 rounded-2xl" 
         checked={isChecked}
         onChange={handleCheckboxChange}
       />
